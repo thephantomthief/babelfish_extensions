@@ -33,14 +33,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-1
+1.00000000
 ~~END~~
 
 SELECT SCOPE_IDENTITY();
 go
 ~~START~~
 numeric
-1
+1.00000000
 ~~END~~
 
 SELECT @@SERVERNAME;
@@ -178,14 +178,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-9
+9.00000000
 ~~END~~
 
 SELECT SCOPE_IDENTITY();
 go
 ~~START~~
 numeric
-9
+9.00000000
 ~~END~~
 
 
@@ -249,7 +249,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-5
+5.00000000
 ~~END~~
 
 

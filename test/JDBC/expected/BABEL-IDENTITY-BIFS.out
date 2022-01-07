@@ -36,21 +36,21 @@ SELECT IDENT_SEED('ident_bifs.t1');
 go
 ~~START~~
 numeric
-1
+1.00000000
 ~~END~~
 
 SELECT IDENT_INCR('ident_bifs.t1');
 go
 ~~START~~
 numeric
-1
+1.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-1
+1.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t1 (c1) VALUES (42);
@@ -77,14 +77,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-5
+5.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-5
+5.00000000
 ~~END~~
 
 
@@ -99,14 +99,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t1 (id, c1) VALUES (-5, 42);
@@ -117,14 +117,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--5
+-5.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t1 OFF;
@@ -139,14 +139,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-11
+11.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-11
+11.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t1 (c1) VALUES (42);
@@ -157,14 +157,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-12
+12.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-12
+12.00000000
 ~~END~~
 
 
@@ -181,14 +181,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t2');
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t2 OFF;
@@ -203,14 +203,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-11
+11.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t2');
 go
 ~~START~~
 numeric
-11
+11.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t2 (c1) VALUES (42);
@@ -221,14 +221,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-12
+12.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t2');
 go
 ~~START~~
 numeric
-12
+12.00000000
 ~~END~~
 
 
@@ -241,14 +241,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-13
+13.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-13
+13.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t1 (c1) VALUES (42);
@@ -259,14 +259,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-14
+14.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-14
+14.00000000
 ~~END~~
 
 
@@ -277,28 +277,28 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-14
+14.00000000
 ~~END~~
 
 SELECT IDENT_SEED('ident_bifs.t3');
 go
 ~~START~~
 numeric
-5
+5.00000000
 ~~END~~
 
 SELECT IDENT_INCR('ident_bifs.t3');
 go
 ~~START~~
 numeric
--25
+-25.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
-5
+5.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t3 (c1) VALUES (42);
@@ -325,14 +325,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--95
+-95.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--95
+-95.00000000
 ~~END~~
 
 
@@ -347,14 +347,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--500
+-500.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--500
+-500.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t3 (id, c1) VALUES (10, 42);
@@ -365,14 +365,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--500
+-500.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t3 OFF;
@@ -387,14 +387,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--525
+-525.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--525
+-525.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t3 (c1) VALUES (42);
@@ -405,14 +405,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--550
+-550.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--550
+-550.00000000
 ~~END~~
 
 
@@ -423,21 +423,21 @@ SELECT IDENT_SEED('ident_bifs.t4');
 go
 ~~START~~
 numeric
--10
+-10.00000000
 ~~END~~
 
 SELECT IDENT_INCR('ident_bifs.t4');
 go
 ~~START~~
 numeric
--1
+-1.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t4');
 go
 ~~START~~
 numeric
--10
+-10.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t4 ON;
@@ -450,14 +450,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--50
+-50.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t4');
 go
 ~~START~~
 numeric
--50
+-50.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t4 OFF;
@@ -472,14 +472,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--51
+-51.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t4');
 go
 ~~START~~
 numeric
--51
+-51.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t4 (c1) VALUES (42);
@@ -490,14 +490,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--52
+-52.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t4');
 go
 ~~START~~
 numeric
--52
+-52.00000000
 ~~END~~
 
 
@@ -510,14 +510,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--575
+-575.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--575
+-575.00000000
 ~~END~~
 
 INSERT INTO ident_bifs.t3 (c1) VALUES (42);
@@ -528,14 +528,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--600
+-600.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--600
+-600.00000000
 ~~END~~
 
 
@@ -550,14 +550,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--100
+-100.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-9999
+9999.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t1 OFF;
@@ -601,14 +601,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-378
+378.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-9999
+9999.00000000
 ~~END~~
 
 
@@ -621,14 +621,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-13
+13.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t2');
 go
 ~~START~~
 numeric
-13
+13.00000000
 ~~END~~
 
 
@@ -643,14 +643,14 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-378
+378.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t2');
 go
 ~~START~~
 numeric
-9999
+9999.00000000
 ~~END~~
 
 SET IDENTITY_INSERT ident_bifs.t2 OFF;
@@ -661,28 +661,28 @@ SELECT IDENT_CURRENT('ident_bifs.t1');
 go
 ~~START~~
 numeric
-9999
+9999.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t2');
 go
 ~~START~~
 numeric
-9999
+9999.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t3');
 go
 ~~START~~
 numeric
--600
+-600.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('ident_bifs.t4');
 go
 ~~START~~
 numeric
--52
+-52.00000000
 ~~END~~
 
 
@@ -693,21 +693,21 @@ SELECT IDENT_SEED('id_bifs_t1');
 go
 ~~START~~
 numeric
-64
+64.00000000
 ~~END~~
 
 SELECT IDENT_INCR('id_bifs_t1');
 go
 ~~START~~
 numeric
-32
+32.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('id_bifs_t1');
 go
 ~~START~~
 numeric
-64
+64.00000000
 ~~END~~
 
 INSERT INTO id_bifs_t1 (c1) VALUES (8);
@@ -718,14 +718,14 @@ SELECT IDENT_CURRENT('id_bifs_t1');
 go
 ~~START~~
 numeric
-64
+64.00000000
 ~~END~~
 
 SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-64
+64.00000000
 ~~END~~
 
 
@@ -736,32 +736,21 @@ SELECT IDENT_SEED('[ident_bifs].[ID_BIFs_T2]');
 go
 ~~START~~
 numeric
-0
+0E-8
 ~~END~~
 
 SELECT IDENT_INCR('[ident_bifs].[ID_BIFs_T2]');
 go
 ~~START~~
 numeric
--128
+-128.00000000
 ~~END~~
 
 SELECT IDENT_CURRENT('[ident_bifs].[ID_BIFs_T2]');
 go
 ~~START~~
 numeric
-0
-~~END~~
-
-INSERT INTO [ident_bifs].[ID_BIFs_T2] (c1) VALUES (8);
-go
-~~ROW COUNT: 1~~
-
-SELECT IDENT_CURRENT('[ident_bifs].[ID_BIFs_T2]');
-go
-~~START~~
-numeric
-0
+0E-8
 ~~END~~
 
 INSERT INTO [ident_bifs].[ID_BIFs_T2] (c1) VALUES (8);
@@ -772,14 +761,25 @@ SELECT IDENT_CURRENT('[ident_bifs].[ID_BIFs_T2]');
 go
 ~~START~~
 numeric
--128
+0E-8
+~~END~~
+
+INSERT INTO [ident_bifs].[ID_BIFs_T2] (c1) VALUES (8);
+go
+~~ROW COUNT: 1~~
+
+SELECT IDENT_CURRENT('[ident_bifs].[ID_BIFs_T2]');
+go
+~~START~~
+numeric
+-128.00000000
 ~~END~~
 
 SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--128
+-128.00000000
 ~~END~~
 
 
@@ -788,7 +788,7 @@ SELECT IDENT_SEED('[ident_bifs].ID_BIFs_T2');
 go
 ~~START~~
 numeric
-0
+0E-8
 ~~END~~
 
 SELECT IDENT_INCR('[ident_bifs].[ID_BIFs_T2');

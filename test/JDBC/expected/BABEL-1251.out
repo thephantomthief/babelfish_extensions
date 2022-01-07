@@ -14,7 +14,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-10
+10.00000000
 ~~END~~
 
 SET IDENTITY_INSERT babel_1251.t1 OFF;
@@ -35,7 +35,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-11
+11.00000000
 ~~END~~
 
 
@@ -52,7 +52,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--10
+-10.00000000
 ~~END~~
 
 SET IDENTITY_INSERT babel_1251.t2 OFF;
@@ -65,7 +65,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
--11
+-11.00000000
 ~~END~~
 
 SELECT * FROM babel_1251.t2;
@@ -88,7 +88,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-1
+1.00000000
 ~~END~~
 
 SET IDENTITY_INSERT babel_1251.t3 ON;
@@ -103,7 +103,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-20
+20.00000000
 ~~END~~
 
 INSERT INTO babel_1251.t3(col1, col2) VALUES ('hello', 1);
@@ -114,7 +114,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-21
+21.00000000
 ~~END~~
 
 SET IDENTITY_INSERT babel_1251.t3 ON;
@@ -127,7 +127,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-30
+30.00000000
 ~~END~~
 
 SET IDENTITY_INSERT babel_1251.t3 OFF;
@@ -146,7 +146,7 @@ SELECT @@IDENTITY;
 go
 ~~START~~
 numeric
-30
+30.00000000
 ~~END~~
 
 
