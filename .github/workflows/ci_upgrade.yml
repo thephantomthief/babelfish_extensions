@@ -41,6 +41,7 @@ jobs:
           sudo make install
           cp /usr/local/lib/libantlr4-runtime.so.4.9.3 ~/postgres/lib/
       - name: Set env variables and build extensions
+      - uses: actions/checkout@v2
         with:
           ref: 'BABEL_1_0_0'
         run: |
