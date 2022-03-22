@@ -116,7 +116,7 @@ jobs:
       - name: Update extensions
         run: |
           cd ~
-          ~/postgres/bin/pg_ctl -D ~/postgres/data/ -l logfile start
+          ~/postgres/bin/pg_ctl -D ~/postgres/data/ -l logfile restart
           sudo ~/postgres/bin/psql -d postgres -U runner -c "ALTER EXTENSION "babelfishpg_common" UPDATE"
           sudo ~/postgres/bin/psql -d postgres -U runner -c "ALTER EXTENSION "babelfishpg_tsql" UPDATE"
           sudo ~/postgres/bin/psql -d jdbc_testdb -U runner -c "\dx"
