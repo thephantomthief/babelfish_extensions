@@ -43,7 +43,7 @@ jobs:
       - name: Set env variables and build extensions
       - uses: actions/checkout@v2
         with:
-          ref: 'BABEL_1_0_0'
+          ref: BABEL_1_0_0
         run: |
           export PG_CONFIG=~/postgres/bin/pg_config
           export PG_SRC=~/work/babelfish_extensions/postgresql_modified_for_babelfish
