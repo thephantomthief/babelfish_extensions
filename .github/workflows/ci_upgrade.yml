@@ -40,9 +40,10 @@ jobs:
           make
           sudo make install
           cp /usr/local/lib/libantlr4-runtime.so.4.9.3 ~/postgres/lib/
-      - name: Set env variables and build extensions
+      - uses: actions/checkout@v2
         with:
           ref: BABEL_1_0_0
+      - name: Set env variables and build extensions
         run: |
           export PG_CONFIG=~/postgres/bin/pg_config
           export PG_SRC=~/work/babelfish_extensions/postgresql_modified_for_babelfish
@@ -93,9 +94,11 @@ jobs:
           make install
           make check
           cd contrib && make && sudo make install
+      - uses: actions/checkout@v2
+        with:
+          ref: BABEL_1_X_DEV
       - name: Set env variables and build extensions on development branch
         run: |
-          git checkout BABEL_1_X_DEV
           export PG_CONFIG=~/postgres/bin/pg_config
           export PG_SRC=~/work/babelfish_extensions/postgresql_modified_for_babelfish
           export cmake=$(which cmake)
