@@ -42,6 +42,7 @@ jobs:
           cp /usr/local/lib/libantlr4-runtime.so.4.9.3 ~/postgres/lib/
       - uses: actions/checkout@v2
         with:
+          repository: babelfish-for-postgresql/babelfish_extensions
           ref: BABEL_1_0_0
       - name: Set env variables and build extensions
         run: |
@@ -96,6 +97,7 @@ jobs:
           cd contrib && make && sudo make install
       - uses: actions/checkout@v2
         with:
+          repository: babelfish-for-postgresql/babelfish_extensions
           ref: BABEL_1_X_DEV
       - name: Set env variables and build extensions on development branch
         run: |
