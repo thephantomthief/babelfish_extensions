@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Clone, build, and run tests for Postgres engine using $ENGINE_VER_FROM
+      - name: Clone, build, and run tests for Postgres engine using old version
         run: |
           cd ..
           git clone --branch $ENGINE_VER_FROM https://github.com/babelfish-for-postgresql/postgresql_modified_for_babelfish.git
@@ -50,7 +50,7 @@ jobs:
         with:
           repository: babelfish-for-postgresql/babelfish_extensions
           ref: $EXTENSION_VER_FROM
-      - name: Set env variables and build extensions using $EXTENSION_VER_FROM
+      - name: Set env variables and build extensions using old version
         run: |
           export PG_CONFIG=~/postgres/bin/pg_config
           export PG_SRC=~/work/babelfish_extensions/postgresql_modified_for_babelfish
@@ -91,7 +91,7 @@ jobs:
           sudo ~/postgres/bin/psql -d jdbc_testdb -U runner -c "CALL sys.initialize_babelfish('jdbc_user');"
           sudo ~/postgres/bin/psql -d jdbc_testdb -U runner -c "\dx"
           sqlcmd -S localhost -U jdbc_user -P 12345678 -Q "SELECT @@version GO"
-      - name: Clone, build, and run tests for Postgres engine using $ENGINE_VER_TO
+      - name: Clone, build, and run tests for Postgres engine using new version
         run: |
           cd ../postgresql_modified_for_babelfish
           git checkout $ENGINE_VER_TO
@@ -105,7 +105,7 @@ jobs:
         with:
           repository: babelfish-for-postgresql/babelfish_extensions
           ref: $EXTENSION_VER_TO
-      - name: Set env variables and build extensions using $EXTENSION_VER_TO
+      - name: Set env variables and build extensions using new version
         run: |
           export PG_CONFIG=~/postgres/bin/pg_config
           export PG_SRC=~/work/babelfish_extensions/postgresql_modified_for_babelfish
