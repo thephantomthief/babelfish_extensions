@@ -118,8 +118,7 @@ jobs:
           cd ~
           ~/postgres/bin/pg_ctl -D ~/postgres/data/ -l logfile restart
           sudo ~/postgres/bin/psql -d jdbc_testdb -U runner -c "\dx"
-          sudo ~/postgres/bin/psql -d postgres -U runner -c "ALTER EXTENSION "babelfishpg_common" UPDATE;"
-          sudo ~/postgres/bin/psql -d postgres -U runner -c "ALTER EXTENSION "babelfishpg_tsql" UPDATE;"
+          sudo ~/postgres/bin/psql -d jdbc_testdb -U runner -c "ALTER EXTENSION "babelfishpg_common" UPDATE; ALTER EXTENSION "babelfishpg_tsql" UPDATE;"
           sudo ~/postgres/bin/psql -d jdbc_testdb -U runner -c "\dx"
           sqlcmd -S localhost -U jdbc_user -P 12345678 -Q "SELECT @@version GO"
       - name: Run JDBC test framework
