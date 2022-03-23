@@ -377,7 +377,7 @@ Output diff can be found in '/home/runner/work/babelfish_extensions/babelfish_ex
 [INFO] ------------------------------------------------------------------------
 ```
 
-You will also be provided with the location of the .diff file which contains the diff between the generated output and expected output. The format of the name of the diff file is `dd-MM-yyyy'T'HH:mm:ss.SSS` where
+You will also be provided with the location of the `.diff` file which contains the diff between the generated output and expected output. The format of the name of the diff file is `dd-MM-yyyy'T'HH:mm:ss.SSS` where
 - `dd`   → date
 - `MM`   → month
 - `yyyy` → year
