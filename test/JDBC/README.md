@@ -28,25 +28,22 @@ Java, Maven
 ### Steps to run
 Once you have built the modified Postgres engine and Babelfish extensions from [here](https://github.com/babelfish-for-postgresql/babelfish_extensions/blob/BABEL_1_X_DEV/contrib/README.md), do the following:
 1. Create a postgres database and initialize babelfish in it (if you already have a database with babelfish initialized you can omit this step or cleanup before you initialize)
-    ```
+    ```bash
     ./init.sh
     ```
-
 2. Run the tests
     ```bash
     mvn test
     ```
-
 3. Cleanup all the objects, users, roles and databases created while running the tests
-    ```
+    ```bash
     ./cleanup.sh
     ```
 
 ## How to run tests against a custom Babelfish endpoint
-
 By default the tests will run against the server running on localhost. You can specify a custom endpoint, database, user etc. in `test/JDBC/src/main/resources/config.txt`. 
 The [config file](https://github.com/babelfish-for-postgresql/babelfish_extensions/blob/BABEL_1_X_DEV/test/JDBC/src/main/resources/config.txt) has many other options you can change for your test runs. Alternatively, you can also set these option through environment variables as follows:
-```
+```bash
 export databaseName = test_db
 ```
 
@@ -56,17 +53,16 @@ By default all the tests will run. You can specify which tests should run in the
 ## Writing tests
 ### Plain SQL Batch
 Separate SQL Batches with `GO`:
-```
-<SQL Batch 1>
+```tsql
+/* SQL Batch 1 */
 GO
 
-<SQL Batch 2>
+/* SQL Batch 2 */
 GO
 ```
 
 **Example**
-
-```sql
+```tsql
 CREATE TABLE t1 (a int)
 GO
 
@@ -139,7 +135,6 @@ Input file type: `.txt`
 ---
 
 ### Transactions
-
 This section covers how to execute transactional statements using JDBC APIs. To execute transactional as a SQL Batch refer [here](#plain-sql-batch).
 
 Execute a transactional statement:
@@ -161,7 +156,6 @@ Codes for isolation levels are as follows:
 5. `sn` → SNAPSHOT
 
 **Example**
-
 ```
 txn#!#isolation#!#ru
 txn#!#begin
@@ -173,14 +167,13 @@ select @@TRANCOUNT as txncnt
 txn#!#commit
 ```
 
-**NOTE:** JDBC does not support Connection.beginTransaction() so in this case `txn#!#begin`  will simply set auto commit to false so that transactions are committed only when Connection.commit() is called explicitly.
+**NOTE:** JDBC does not support API like Connection.beginTransaction() so in this case `txn#!#begin`  will simply set auto commit to false so that transactions are committed only when Connection.commit() is called explicitly.
 
 Input file type: `.txt`
 
 ---
 
 ### Cursors
-
 Open a cursor:
 ```
 cursor#!#open#!# <select statement on which cursor is opened> #!# <cursor options follow, separated by '#!#' delimiter>
@@ -226,7 +219,6 @@ Input file type: `.txt`
 ---
 
 ### SQL Authentication
-
 To check different authentication use cases via JDBC SQL Server Driver:
 ```
 java_auth#!# < connection attribute and value pairs follow, separated by '#!#' delimiter>
@@ -250,18 +242,17 @@ Input file type: `.txt`
 ---
 
 ### Cross Dialect (intermixing queries in T-SQL and PL/pgSQL dialect)
-
 A SQL Batch in T-SQL should be added as:
-```
+```tsql
 -- tsql <T-SQL connection attribute and value pairs if any, separated by spaces>
-<T-SQL batch>
+/* T-SQL batch */
 GO
 ```
 
 A SQL Batch in PL/pgSQL should be added as:
-```
+```tsql
 -- psql <PSQL connection attribute and value pairs if any, separated by spaces>
-<PL/pgSQL batch>
+/* PL/pgSQL batch */
 GO
 ```
 
@@ -275,7 +266,7 @@ Connection attributes should be specified in pairs:
 Currently the attributes that can specified are `user`, `password`, `database` and `currentSchema` (only for PG connection).
 
 **Example**
-```sql
+```tsql
 -- tsql
 CREATE PROCEDURE tsql_interop_proc1
 AS
@@ -332,11 +323,10 @@ Input file type: `.mix`
 - You CANNOT club functionalities of different file types. For example, you cannot execute prep-exec statements (functionality of `.txt` input file) in a `.mix` file. 
 
 ## Adding tests
-
 The test framework consumes `.sql`, `.txt` and `.mix` files as input (discussed above) and uses them to generate the output (.out) files.
 
 1. Add the input test file in the `test/JDBC/input` directory. You can also create subdirectories and test files inside those
-2. Run the test framework to generate the output file (you may want to edit the schedule file to only the run the tests that you have added instead of running all the tests)
+2. Run the test framework to generate the output file (you may want to edit the schedule file to only the run the tests that you have added instead of running all the tests). The test will fail because it does not have a corresponding expected output file yet.
 3. Check the `test/JDBC/output` directory for the generated output file. The output file (.out) will be of the format:
     ```
     test/JDBC/output/<your_test_filename>.out
@@ -345,10 +335,10 @@ The test framework consumes `.sql`, `.txt` and `.mix` files as input (discussed 
     ```
     mv test/JDBC/output/<your_test_filename>.out test/JDBC/expected
     ```
+5. Re-run the test framework and ensure that the newly added test now passes
 
 ## Reading the console output and diff
-
-If all the tests PASS, `TESTS FAILED` will be zero and you will greeted with a `BUILD SUCCESS` message
+If all the tests PASS, `TESTS FAILED` will be zero and you will be greeted with a `BUILD SUCCESS` message
 ```
 ###########################################################################
 TOTAL TESTS:	575
@@ -362,7 +352,7 @@ TESTS FAILED:	0
 [INFO] ------------------------------------------------------------------------
 ```
 
-If one or more tests FAIL, `TESTS FAILED` will not be zero and you will greeted with a `BUILD FAILURE` message
+If one or more tests FAIL, `TESTS FAILED` will not be zero and you will be greeted with a `BUILD FAILURE` message
 ```
 ###########################################################################
 TOTAL TESTS:	574
