@@ -8,7 +8,8 @@ jobs:
 
   run-all-tests:
     runs-on: ubuntu-20.04
-
+    
+    steps:
       - name: Download artifact from previous run
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
