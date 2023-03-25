@@ -18,7 +18,7 @@ jobs:
           if_no_artifact_found: warn
 
       - name: Fetch CSV from prev run
-        if: always() && steps.configure-python-environment.outcome == 'success'
+        if: always()
         run: | 
           paste -s -d, <(date +"%m/%d/%Y %H:%M:%S"; echo 1; echo 2) >> my.csv
 
@@ -26,5 +26,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: coverage_money
-          path: my.csv
+          name: my.csv
+          path: ./
