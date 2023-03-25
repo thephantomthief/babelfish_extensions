@@ -1,0 +1,29 @@
+name: Demo
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+
+  run-all-tests:
+    runs-on: ubuntu-20.04
+
+      - name: Download artifact from previous run
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          name: my.csv
+          if_no_artifact_found: warn
+
+      - name: Fetch CSV from prev run
+        if: always() && steps.configure-python-environment.outcome == 'success'
+        run: | 
+          paste -s -d, <(date +"%m/%d/%Y %H:%M:%S"; echo 1; echo 2) >> my.csv
+
+      - name: Upload CSV
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage_money
+          path: my.csv
