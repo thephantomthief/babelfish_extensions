@@ -1,0 +1,109 @@
+name: Code Coverage Temp
+on: [push, pull_request]
+
+jobs:
+  run-babelfish-jdbc-tests:
+    env:
+      INSTALL_DIR: psql
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        id: checkout
+
+      - name: Install Dependencies
+        id: install-dependencies
+        if: always()
+        uses: ./.github/composite-actions/install-dependencies
+
+      - name: Install Code Coverage Dependencies
+        id: install-code-coverage-dependencies
+        if: always()
+        run: |
+          sudo apt-get install lcov
+
+      - name: Build Modified Postgres
+        id: build-modified-postgres
+        if: always() && steps.install-dependencies.outcome == 'success'
+        run: |
+          cd ..
+          rm -rf postgresql_modified_for_babelfish
+          $GITHUB_WORKSPACE/.github/scripts/clone_engine_repo "$GITHUB_REPOSITORY_OWNER" "${{matrix.branch}}"
+          cd postgresql_modified_for_babelfish
+          ./configure --prefix=$HOME/psql/ --with-python PYTHON=/usr/bin/python3.8 --enable-coverage --enable-cassert CFLAGS="-ggdb" --with-libxml --with-uuid=ossp --with-icu
+          make -j 4 2>error.txt
+          make install
+          cd contrib && make && sudo make install
+          cd ../..
+          rm -rf pg_hint_plan
+          git clone --depth 1 --branch REL15_1_5_1 https://github.com/ossc-db/pg_hint_plan.git
+          fi
+          cd pg_hint_plan
+          export PATH=$HOME/psql/bin:$PATH
+          make
+          make install
+      
+      - name: Compile ANTLR
+        id: compile-antlr
+        if: always() && steps.build-modified-postgres.outcome == 'success'
+        uses: ./.github/composite-actions/compile-antlr
+      
+      - name: Build Extensions
+        id: build-extensions
+        if: always() && steps.compile-antlr.outcome == 'success'
+        uses: ./.github/composite-actions/build-extensions
+
+      - name: Build tds_fdw Extension
+        id: build-tds_fdw-extension
+        if: always() && steps.build-extensions.outcome == 'success'
+        uses: ./.github/composite-actions/build-tds_fdw-extension
+
+      - name: Build PostGIS Extension
+        id: build-postgis-extension
+        if: always() && steps.build-tds_fdw-extension.outcome == 'success'
+        uses: ./.github/composite-actions/build-postgis-extension
+
+      - name: Install Extensions
+        id: install-extensions
+        if: always() && steps.build-postgis-extension.outcome == 'success'
+        uses: ./.github/composite-actions/install-extensions
+
+      - name: Cleanup babelfish database
+        id: cleanup
+        if: always() && steps.install-extensions.outcome == 'success'
+        run: |
+          sudo ~/psql/bin/psql -d postgres -U runner -v user="jdbc_user" -v db="jdbc_testdb" -f .github/scripts/cleanup_babelfish_database.sql
+
+      - name: Generate code coverage HTML report
+        id: code-coverage
+        if: always()
+        run: |
+          export PG_CONFIG=~/psql/bin/pg_config
+          export PG_SRC=~/work/postgresql_modified_for_babelfish
+          export cmake=$(which cmake)
+          cd contrib
+          for ext in babelfishpg_common babelfishpg_money babelfishpg_tds babelfishpg_tsql  
+          do
+            cd $ext
+            /usr/bin/lcov --gcov-tool /usr/bin/gcov -q --no-external -c -i -d . -d ./ -o lcov_base.info
+            /usr/bin/lcov --gcov-tool /usr/bin/gcov -q --no-external -c -d . -d ./ -o lcov_test.info
+            rm -rf coverage
+            /usr/bin/genhtml -q --legend -o coverage --title='$ext' --ignore-errors source --num-spaces=4  lcov_base.info lcov_test.info
+            touch coverage-html-stamp
+            cd ..
+          done
+        shell: bash
+
+      - name: Summarize code coverage
+        id: code-coverage-summary
+        if: always()
+        run: |
+          cd contrib/
+          lcov -a babelfishpg_tsql/lcov_test.info -a babelfishpg_tds/lcov_test.info -a babelfishpg_common/lcov_test.info -a babelfishpg_money/lcov_test.info -o lcov.info
+          lcov --list lcov.info
+
+      - name: Upload coverage to coveralls
+        if: always()
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: contrib/lcov.info
