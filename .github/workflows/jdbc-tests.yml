@@ -94,7 +94,7 @@ jobs:
         
       - name: Generate Code Coverage
         id: generate-code-coverage
-        if: always() && github.event_name == 'workflow_call'
+        if: always() && github.event_name == 'pull_request'
         run: |
           export PG_CONFIG=~/psql/bin/pg_config
           export PG_SRC=~/work/postgresql_modified_for_babelfish
