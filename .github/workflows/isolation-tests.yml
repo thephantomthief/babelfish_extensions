@@ -99,13 +99,13 @@ jobs:
         if: always() && steps.generate-code-coverage.outcome == 'success'
         run: |
           cd contrib/
-          lcov -a babelfishpg_tsql/lcov_test.info -a babelfishpg_tds/lcov_test.info -a babelfishpg_common/lcov_test.info -a babelfishpg_money/lcov_test.info -o python-lcov.info
-          lcov --list python-lcov.info
+          lcov -a babelfishpg_tsql/lcov_test.info -a babelfishpg_tds/lcov_test.info -a babelfishpg_common/lcov_test.info -a babelfishpg_money/lcov_test.info -o isolation-lcov.info
+          lcov --list isolation-lcov.info
 
       - name: Upload Coverage Report for Babelfish Extensions
         if: always() && steps.code-coverage-summary.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
-          name: python-coverage-babelfish-extensions
-          path: contrib/python-lcov.info
+          name: isolation-coverage-babelfish-extensions
+          path: contrib/isolation-lcov.info
           retention-days: 1
