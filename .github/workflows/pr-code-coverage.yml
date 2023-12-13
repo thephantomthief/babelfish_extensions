@@ -40,7 +40,7 @@ jobs:
     - uses: actions/download-artifact@v3
       id: download-jdbc-coverage
       with:
-        name: jdbc-coverage-babelfish_extensions
+        name: jdbc-coverage-babelfish-extensions
         path: contrib/
     
     - uses: actions/download-artifact@v3
