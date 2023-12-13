@@ -1,0 +1,87 @@
+name: PR Code Coverage
+on: [pull_request]
+
+jobs:
+
+  run-jdbc-tests:
+    name: JDBC Tests
+    uses: ./.github/workflows/jdbc-tests.yml
+  
+  run-odbc-tests:
+    name: ODBC Tests
+    uses: ./.github/workflows/odbc-tests.yml
+  
+  run-dotnet-tests:
+    name: Dotnet Tests
+    uses: ./.github/workflows/dotnet-tests.yml
+
+  run-python-tests:
+    name: Python Tests
+    uses: ./.github/workflows/python-tests.yml
+
+  run-isolation-tests:
+    name: Isolation Tests
+    uses: ./.github/workflows/isolation-tests.yml
+
+  run-babelfish-code-coverage-for-pull_request:
+    needs: [run-jdbc-tests, run-odbc-tests, run-dotnet-tests, run-python-tests, run-isolation-tests]
+    runs-on: ubuntu-20.04
+    steps:
+    
+    - uses: actions/checkout@v2
+      id: checkout
+    
+    - name: Install Code Coverage Dependencies
+      id: install-code-coverage-dependencies
+      if: always()
+      run: |
+        sudo apt-get install lcov
+
+    - uses: actions/download-artifact@v3
+      id: download-jdbc-coverage
+      with:
+        name: jdbc-coverage-babelfish_extensions
+        path: contrib/
+    
+    - uses: actions/download-artifact@v3
+      id: download-dotnet-coverage
+      with:
+        name: dotnet-coverage-babelfish-extensions
+        path: contrib/
+    
+    - uses: actions/download-artifact@v3
+      id: download-odbc-coverage
+      with:
+        name: odbc-coverage-babelfish-extensions
+        path: contrib/
+    
+    - uses: actions/download-artifact@v3
+      id: download-python-coverage
+      with:
+        name: python-coverage-babelfish-extensions
+        path: contrib/
+        
+    - uses: actions/download-artifact@v3
+      id: download-isolation-coverage
+      with:
+        name: isolation-coverage-babelfish-extensions
+        path: contrib/
+
+    - name: generate net code coverage
+      id: net-code-coverage
+      if: (always() && steps.download-dotnet-coverage.outcome == 'success' && steps.download-jdbc-coverage.outcome == 'success' && steps.download-odbc-coverage.outcome == 'success')
+      run: |
+        cd contrib/
+        ls 
+        lcov -a jdbc-lcov.info -a dotnet-lcov.info -a odbc-lcov.info -o lcov.info
+        /usr/bin/genhtml -q --legend -o coverage --title='net_code_coverage' --ignore-errors source --num-spaces=4  lcov.info
+      shell: bash
+
+    - name: Upload Net Coverage Report for Babelfish Extensions
+      if: always() && steps.net-code-coverage.outcome == 'success'
+      uses: actions/upload-artifact@v3
+      with:
+        name: net-coverage-babelfish-extensions
+        path: contrib/coverage/
+        retention-days: 1
+
