@@ -287,11 +287,6 @@ varbinary
 6161
 ~~END~~
 
+lllllllllllllllll
 
-SELECT CAST(CAST(0x616263646566 AS VARBINARY(5)) AS BINARY(3))
-GO
-~~START~~
-binary
-616263
-~~END~~
 
