@@ -64,7 +64,7 @@ jobs:
         if: always() && steps.jdbc.outcome == 'failure'
         uses: actions/upload-artifact@v2
         with:
-          name: postgres-log
+          name: postgres-log-jdbc
           path: ~/psql/data/logfile
       
       # The test summary files contain paths with ':' characters, which is not allowed with the upload-artifact actions
@@ -120,6 +120,6 @@ jobs:
         if: always() && steps.code-coverage-summary.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
-          name: jdbc-coverage-babelfish-extensions
+          name: coverage-babelfish-extensions-jdbc
           path: contrib/jdbc-lcov.info
           retention-days: 1

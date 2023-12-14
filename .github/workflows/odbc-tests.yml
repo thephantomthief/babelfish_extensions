@@ -74,6 +74,6 @@ jobs:
         if: always() && steps.code-coverage-summary.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
-          name: odbc-coverage-babelfish-extensions
+          name: coverage-babelfish-extensions-odbc
           path: contrib/odbc-lcov.info
           retention-days: 1

@@ -40,35 +40,35 @@ jobs:
     - uses: actions/download-artifact@v3
       id: download-jdbc-coverage
       with:
-        name: jdbc-coverage-babelfish-extensions
+        name:  ̰
         path: contrib/
     
     - uses: actions/download-artifact@v3
       id: download-dotnet-coverage
       with:
-        name: dotnet-coverage-babelfish-extensions
+        name: coverage-babelfish-extensions-dotnet
         path: contrib/
     
     - uses: actions/download-artifact@v3
       id: download-odbc-coverage
       with:
-        name: odbc-coverage-babelfish-extensions
+        name: coverage-babelfish-extensions-odbc
         path: contrib/
     
     - uses: actions/download-artifact@v3
       id: download-python-coverage
       with:
-        name: python-coverage-babelfish-extensions
+        name: coverage-babelfish-extensions-python
         path: contrib/
         
     - uses: actions/download-artifact@v3
       id: download-isolation-coverage
       with:
-        name: isolation-coverage-babelfish-extensions
+        name: coverage-babelfish-extensions-isolation
         path: contrib/
 
     - name: Generate Overall Code Coverage
-      id: generate-overall-code-coverage
+      id: generate-total-code-coverage
       if: |
         always() && steps.download-dotnet-coverage.outcome == 'success'
         && steps.download-jdbc-coverage.outcome == 'success' 
@@ -83,9 +83,9 @@ jobs:
       shell: bash
 
     - name: Upload Net Coverage Report for Babelfish Extensions
-      if: always() && steps.generate-overall-code-coverage.outcome == 'success'
+      if: always() && steps.generate-total-code-coverage.outcome == 'success'
       uses: actions/upload-artifact@v3
       with:
-        name: net-coverage-babelfish-extensions
+        name: coverage-babelfish-extensions-total
         path: contrib/coverage/
         retention-days: 1

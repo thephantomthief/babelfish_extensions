@@ -74,6 +74,6 @@ jobs:
         if: always() && steps.code-coverage-summary.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
-          name: python-coverage-babelfish-extensions
+          name: coverage-babelfish-extensions-python
           path: contrib/python-lcov.info
           retention-days: 1
