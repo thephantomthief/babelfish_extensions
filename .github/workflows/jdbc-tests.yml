@@ -91,6 +91,10 @@ jobs:
         with:
           name: jdbc-output-diff.diff
           path: test/JDBC/Info/output-diff.diff
+      
+      - name: Check and upload coredumps
+        if: always() && steps.jdbc.outcome == 'failure'
+        uses: ./.github/composite-actions/upload-coredump
         
       - name: Generate Code Coverage
         id: generate-code-coverage
