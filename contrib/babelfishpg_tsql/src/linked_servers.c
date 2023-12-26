@@ -1012,6 +1012,8 @@ getOpenqueryTupdescFromMetadata(char *linked_server, char *query, TupleDesc *tup
 
 				LINKED_SERVER_DEBUG("code coverage debug log");
 
+				LINKED_SERVER_DEBUG("code coverage debug log");
+
 				/* fetch the rows */
 				while (LINKED_SERVER_NEXT_ROW(lsproc) != NO_MORE_ROWS)
 				{
