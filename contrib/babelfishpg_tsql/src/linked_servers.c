@@ -861,6 +861,8 @@ linked_server_establish_connection(char *servername, LinkedServerProcess * lspro
 		}
 
 		LINKED_SERVER_DEBUG("LINKED SERVER: Connected to remote server");
+
+		LINKED_SERVER_DEBUG("code coverage debug log");
 	}
 	PG_CATCH();
 	{
@@ -1007,6 +1009,8 @@ getOpenqueryTupdescFromMetadata(char *linked_server, char *query, TupleDesc *tup
 							 ));
 
 				LINKED_SERVER_DEBUG("LINKED SERVER: (Metadata) - Fetching result rows");
+
+				LINKED_SERVER_DEBUG("Line Added for code coverage");
 
 				/* fetch the rows */
 				while (LINKED_SERVER_NEXT_ROW(lsproc) != NO_MORE_ROWS)
